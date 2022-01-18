@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Rotation();
+        
         if(health <= 0){
             Dead();
         }
