@@ -20,10 +20,10 @@ public class AnimationController : MonoBehaviour
     }
     private void Update()
     {
-        forwardPressed = Input.GetKey("w");
-        rightPressed = Input.GetKey("d");
-        leftPressed = Input.GetKey("a");
-        backPressed = Input.GetKey("s");
+        forwardPressed = Input.GetKey(KeyCode.W);
+        rightPressed = Input.GetKey(KeyCode.D);
+        leftPressed = Input.GetKey(KeyCode.A);
+        backPressed = Input.GetKey(KeyCode.S);
 
         animator.SetFloat("Velocity Z", velocityZ);
         animator.SetFloat("Velocity X", velocityX);
