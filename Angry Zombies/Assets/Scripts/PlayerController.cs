@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Rotation();
-        
+
         if(health <= 0){
             Dead();
         }
@@ -45,5 +45,6 @@ public class PlayerController : MonoBehaviour
 
     private void Dead(){
         animator.SetBool("isDead", true);
+        transform.GetComponent<PlayerController>().enabled = false;
     }
 }
