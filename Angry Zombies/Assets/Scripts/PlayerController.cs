@@ -9,14 +9,20 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public Rigidbody rb;
     public Camera cam;
+    public Animator animator;
+    public float health = 100f;
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
     void Update()
     {
         Move();
         Rotation();
+        if(health <= 0){
+            Dead();
+        }
     }
 
     private void Move(){
@@ -34,5 +40,9 @@ public class PlayerController : MonoBehaviour
         Vector3 finalVector = new Vector3(-mouseLook.x, 0, -mouseLook.y);
 
         rb.rotation = Quaternion.LookRotation(finalVector);
+    }
+
+    private void Dead(){
+        animator.SetBool("isDead", true);
     }
 }
