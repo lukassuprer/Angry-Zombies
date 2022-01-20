@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     public Camera cam;
     public Animator animator;
+    public GameObject weapon;
     public float health = 100f;
 
     private void Start() {
@@ -46,5 +47,6 @@ public class PlayerController : MonoBehaviour
     private void Dead(){
         animator.SetBool("isDead", true);
         transform.GetComponent<PlayerController>().enabled = false;
+        weapon.SetActive(false);
     }
 }
