@@ -16,10 +16,16 @@ public class ZombieScript : MonoBehaviour
     public LayerMask layerPlayer;
     public BoxCollider boxCol;
     public Animator animator;
+    public LineRenderer renderer;
     private void Start() {
         boxCol = GetComponent<BoxCollider>();
         animator = GetComponent<Animator>();
+        renderer = GetComponent<LineRenderer>();
         animator.SetBool("isRunning", true);
+
+        renderer.startWidth = 0.15f;
+        renderer.endWidth = 0.15f;
+        renderer.positionCount = 0;
     }
 
     private void Update(){
@@ -44,6 +50,7 @@ public class ZombieScript : MonoBehaviour
             agent.ResetPath();
             transform.GetComponent<ZombieScript>().enabled = false;
         }
+        DrawPath();
     }
     public void TakeDamage(float amount){
         health -= amount;
@@ -69,19 +76,21 @@ public class ZombieScript : MonoBehaviour
             animator.SetBool("isRunning", false);
             animator.SetBool("isAttacking", true);
             agent.isStopped = true;
+            agent.SetDestination(player.position);
         }
         else if(agent.isStopped == true){
             agent.enabled = true;
             agent.isStopped = false;
             animator.SetBool("isAttacking", false);
             animator.SetBool("isRunning", true);
+            agent.SetDestination(player.position);
         }
         else if(Vector3.Distance(player.position, transform.position) >= 3 && agent.isStopped == true){
             agent.enabled = true;
             agent.isStopped = false;
-             Debug.Log("enabled");
             animator.SetBool("isAttacking", false);
             animator.SetBool("isRunning", true);
+            agent.SetDestination(player.position);
         }   
     }
     private void DealDamage(){
@@ -90,6 +99,21 @@ public class ZombieScript : MonoBehaviour
                 PlayerController playerController = player.gameObject.GetComponent<PlayerController>();
                 playerController.health -= damage;
                 lastShot = Time.time;
+                agent.SetDestination(player.position);
             }
+    }
+
+    void DrawPath(){
+        renderer.positionCount = agent.path.corners.Length;
+        renderer.SetPosition(0, transform.position);
+
+        if(agent.path.corners.Length < 2){
+            return;
+        }
+
+        for(int i = 1; i < agent.path.corners.Length; i++){
+            Vector3 pointPosition = new Vector3(agent.path.corners[i].x, agent.path.corners[i].y, agent.path.corners[i].z);
+            renderer.SetPosition(1,  pointPosition);
+        }
     }
 }

@@ -11,30 +11,46 @@ public class WeaponScript : MonoBehaviour
     public Transform weaponEnd;
     public Camera cam;
     public LineRenderer renderer;
+    public ParticleSystem muzzleFlash;
+    public GameObject impactEffect;
 
     private void Start(){
         renderer = GetComponent<LineRenderer>();
     }
     void Update()
     {
+        //particleSystemPlayed = false;
         Laser();
-        if(Input.GetButton("Fire1") && Time.time > fireRate + lastShot){
-            Shoot();
-            lastShot = Time.time;
+        if(Input.GetButton("Fire1")){
+            if( Time.time > fireRate + lastShot){
+                Shoot();
+                lastShot = Time.time;
+            }
         }
-
+        else{
+            Debug.Log("stop");
+            muzzleFlash.Stop(true);
+        }
     }
 
     private void Shoot(){
+        muzzleFlash.Play();
+
         RaycastHit hit;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         //Vector3 mousePos = Input.mousePosition;
+        // Instantiate(muzzleFlash, weaponEnd.position, weaponEnd.rotation);
+        // muzzleFlash.transform.SetParent(weaponEnd);
+        // Destroy(muzzleFlash);
 
         if(Physics.Raycast(weaponEnd.position, -weaponEnd.forward, out hit, range)){
             ZombieScript zombieScript = hit.transform.GetComponent<ZombieScript>();
             if(zombieScript != null){
                 zombieScript.TakeDamage(damage);
             }
+
+            GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(impactGO, 1f);
         }
     }
 
