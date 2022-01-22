@@ -28,7 +28,6 @@ public class WeaponScript : MonoBehaviour
             }
         }
         else{
-            Debug.Log("stop");
             muzzleFlash.Stop(true);
         }
     }

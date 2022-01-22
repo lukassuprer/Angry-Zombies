@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     public GameObject weapon;
     public float health = 100f;
 
+    private void Awake(){
+        GameManager.playerInstance = this;
+    }
     private void Start() {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
