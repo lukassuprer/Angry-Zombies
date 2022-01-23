@@ -19,6 +19,29 @@ public class SoundManager : MonoBehaviour
             s.source.priority = s.priority;
         }
     }
+    private void Start()
+    {
+        InvokeRepeating("RandomSound", 5f, 5f);
+    }
+    private void RandomSound(){
+        int soundNumber = UnityEngine.Random.Range(2, 6);
+        switch (soundNumber)
+        {
+            case 2:
+                FindObjectOfType<SoundManager>().Play("zombie burp");
+                break;
+            case 3:
+                FindObjectOfType<SoundManager>().Play("zombie moan");
+                break;
+            case 4:
+                FindObjectOfType<SoundManager>().Play("zombie moan1");
+                break;
+            case 5:
+                FindObjectOfType<SoundManager>().Play("zombie moan2");
+                break;
+        }
+        Play("zombie moan");
+    }
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -27,6 +50,6 @@ public class SoundManager : MonoBehaviour
             Debug.Log("sound name is wrong");
             return;
         }
-        s.source.Play();
+        s.source.PlayOneShot(s.source.clip);
     }
 }

@@ -18,11 +18,6 @@ public class ZombieScript : MonoBehaviour
     public Animator animator;
     public LineRenderer renderer;
     private PlayerController playerController;
-    private int soundNumber;
-    private float randomTimeRate;
-    private float timeStart = 1;
-    private float timeEnd = 11;
-    private bool isPlaying;
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -35,11 +30,6 @@ public class ZombieScript : MonoBehaviour
         renderer.positionCount = 0;
 
         agent.SetDestination(player = GameManager.playerInstance.transform.position);
-        float randomTime = Random.Range(1, 11);
-        randomTimeRate = Random.Range(1, 11);
-
-        soundNumber = Random.Range(2, 6); ;
-        InvokeRepeating("RandomSound", randomTime, randomTimeRate);
         InvokeRepeating("FindPlayer", 2f, 2f);
     }
 
@@ -157,47 +147,6 @@ public class ZombieScript : MonoBehaviour
         foreach (Collider c in GetComponents<Collider>())
         {
             c.enabled = active;
-        }
-    }
-    private void RandomSound()
-    {
-        isPlaying = false;
-        timeStart += 1f;
-        timeEnd += 1f;
-        randomTimeRate = Random.Range(timeStart, timeEnd);
-        switch (soundNumber)
-        {
-            case 2:
-                if (isPlaying == false)
-                {
-                    FindObjectOfType<SoundManager>().Play("zombie burp");
-                    isPlaying = true;
-                }
-
-                break;
-            case 3:
-                if (isPlaying == false)
-                {
-                    FindObjectOfType<SoundManager>().Play("zombie moan");
-                    isPlaying = true;
-                }
-
-                break;
-            case 4:
-                if (isPlaying == false)
-                {
-                    FindObjectOfType<SoundManager>().Play("zombie moan1");
-                    isPlaying = true;
-                }
-
-                break;
-            case 5:
-                if (isPlaying == false)
-                {
-                    FindObjectOfType<SoundManager>().Play("zombie moan2");
-                    isPlaying = true;
-                }
-                break;
         }
     }
     private void FindPlayer()
