@@ -7,14 +7,13 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public Sound[] sounds;
-    [HideInInspector]
-    private void Awake()
+    public void Awake()
     {
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
-            s.source.volume = s.volume;
+            s.source.volume = PlayerPrefs.GetFloat("volume");
             s.source.pitch = s.pitch;
             s.source.priority = s.priority;
         }
@@ -22,6 +21,13 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         InvokeRepeating("RandomSound", 5f, 5f);
+    }
+    void Update()
+    {
+        foreach (Sound s in sounds)
+        {
+            s.source.volume = PlayerPrefs.GetFloat("volume");
+        }
     }
     private void RandomSound(){
         int soundNumber = UnityEngine.Random.Range(2, 6);
