@@ -27,7 +27,7 @@ public class WeaponScript : MonoBehaviour
                 lastShot = Time.time;
             }
         }
-        else{
+        else{   
             muzzleFlash.Stop(true);
         }
     }
@@ -50,6 +50,7 @@ public class WeaponScript : MonoBehaviour
 
             GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(impactGO, 1f);
+            FindObjectOfType<SoundManager>().Play("M16 Shoot");
         }
     }
 
