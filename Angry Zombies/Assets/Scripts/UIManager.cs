@@ -2,27 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
     public Slider mainSlider;
+    public Slider mainSlider1;
+    public Text health;
+    public PlayerController playerController;
+    public WeaponScript weaponScript;
     public float sliderValue;
+    public GameObject pauseMenu;
+    public GameObject hud;
+    public Text weaponName;
     private void Start() {
-        //sliderValue = GameObject.Find("Volume Slider").GetComponent<Slider>().value;
-        // mySlider = GetComponent<Slider>();
-        mainSlider.value = PlayerPrefs.GetFloat("volume");
+        if(PlayerPrefs.HasKey("volume")){
+            mainSlider.value = PlayerPrefs.GetFloat("volume");
+        }
+        else{
+            mainSlider.value = 0.1f;
+        }
     }   
     public void SubmitSliderSetting()
     {
-        //Displays the value of the slider in the console.
-        Debug.Log(mainSlider.value);
-        PlayerPrefs.SetFloat("volume", mainSlider.value);
-        PlayerPrefs.Save();
-        //mainSlider.value = FindObjectOfType<SoundManager>().audio.volume;
+        if(GameManager.isPlaying == false){
+            PlayerPrefs.SetFloat("volume", mainSlider1.value);
+            PlayerPrefs.Save();
+        }
+        else{
+            PlayerPrefs.SetFloat("volume", mainSlider.value);
+            PlayerPrefs.Save();
+        }
     }
     private void Update(){
-        //Debug.Log(mySlider.value);
         SubmitSliderSetting();
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            Pause();
+        }
+        if(hud.activeSelf == true){
+            Health();
+        }
+        WeaponName();
+    }
+    public void Health(){
+        health.text = playerController.health.ToString();
+        if(playerController.health <= 0){
+            health.color = Color.red;
+        }
+    }
+    public void WeaponName(){
+        weaponName.text = weaponScript.weaponName;
     }
     public void Play(){
         GameManager.gameStart = true;
@@ -30,5 +59,15 @@ public class UIManager : MonoBehaviour
     public void Exit(){
         Application.Quit();
         Debug.Log("EXIT hahah");
+    }
+    public void Pause(){
+        if(pauseMenu.activeSelf == false){
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0;
+        }
+        else{
+            pauseMenu.SetActive(false);
+            Time.timeScale = 1;
+        }
     }
 }

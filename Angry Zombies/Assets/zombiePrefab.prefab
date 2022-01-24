@@ -2947,14 +2947,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   stopDistance: 2
-  damage: 0
+  damage: 10
   damageRate: 3
   zombie: {fileID: 8221631724276238628}
   agent: {fileID: 9140182642146166129}
   layerPlayer:
     serializedVersion: 2
     m_Bits: 256
-  boxCol: {fileID: 9140182642146166126}
   animator: {fileID: 9140182642146166127}
   renderer: {fileID: 9140182642146166124}
 --- !u!195 &9140182642146166129

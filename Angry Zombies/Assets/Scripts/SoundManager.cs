@@ -26,7 +26,12 @@ public class SoundManager : MonoBehaviour
     {
         foreach (Sound s in sounds)
         {
-            s.source.volume = PlayerPrefs.GetFloat("volume");
+            if(PlayerPrefs.HasKey("volume")){
+                s.source.volume = PlayerPrefs.GetFloat("volume");
+            }
+            else{
+                s.source.volume = 0.1f;
+            }
         }
     }
     private void RandomSound(){
