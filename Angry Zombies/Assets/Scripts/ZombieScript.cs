@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Audio;
 
-public class ZombieScript : MonoBehaviour
+public class ZombieScript : MonoBehaviour, IPooledObject
 {
     public float health = 100f;
     public float stopDistance;
@@ -18,7 +18,7 @@ public class ZombieScript : MonoBehaviour
     public Animator animator;
     public LineRenderer renderer;
     public PlayerController playerController;
-    private void Start()
+    public void OnObjectSpawn()
     {
         playerPos = GameObject.FindObjectOfType<PlayerController>().transform;
         playerController = GameObject.FindObjectOfType<PlayerController>();
