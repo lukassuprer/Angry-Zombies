@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,23 +13,20 @@ public class ZombieScript : MonoBehaviour
     private float lastShot = 0f;
     public GameObject zombie;
     public NavMeshAgent agent;
-    private Vector3 player;
+    public Transform playerPos;
     public LayerMask layerPlayer;
     public Animator animator;
     public LineRenderer renderer;
-    private PlayerController playerController;
+    public PlayerController playerController;
     private void Start()
     {
-        animator = GetComponent<Animator>();
-        renderer = GetComponent<LineRenderer>();
+        playerPos = GameObject.FindObjectOfType<PlayerController>().transform;
+        playerController = GameObject.FindObjectOfType<PlayerController>();
         animator.SetBool("isRunning", true);
-        playerController = FindObjectOfType<PlayerController>();
-        player = GameManager.playerInstance.transform.position;
         renderer.startWidth = 0.15f;
         renderer.endWidth = 0.15f;
         renderer.positionCount = 0;
-
-        agent.SetDestination(player = GameManager.playerInstance.transform.position);
+        agent.SetDestination(playerPos.position);
         InvokeRepeating("FindPlayer", 2f, 2f);
     }
 
@@ -50,7 +47,7 @@ public class ZombieScript : MonoBehaviour
         }
         if (playerController.health > 0)
         {
-            Stop();
+            StopAtPlayer();
         }
         else
         {
@@ -87,15 +84,15 @@ public class ZombieScript : MonoBehaviour
         zombie.SetActive(false);
     }
 
-    private void Stop()
+    private void StopAtPlayer()
     {
         bool distance = agent.remainingDistance > agent.stoppingDistance;
-        if (Vector3.Distance(player, transform.position) <= 3)
+        if (Vector3.Distance(playerPos.position, transform.position) <= 3)
         {
             animator.SetBool("isRunning", false);
             animator.SetBool("isAttacking", true);
             agent.isStopped = true;
-            agent.SetDestination(player = GameManager.playerInstance.transform.position);
+            agent.SetDestination(playerPos.position);
         }
         else if (agent.isStopped == true)
         {
@@ -103,15 +100,15 @@ public class ZombieScript : MonoBehaviour
             agent.isStopped = false;
             animator.SetBool("isAttacking", false);
             animator.SetBool("isRunning", true);
-            agent.SetDestination(player = GameManager.playerInstance.transform.position);
+            agent.SetDestination(playerPos.position);
         }
-        else if (Vector3.Distance(player, transform.position) >= 3 && agent.isStopped == true)
+        else if (Vector3.Distance(playerPos.position, transform.position) >= 3 && agent.isStopped == true)
         {
             agent.enabled = true;
             agent.isStopped = false;
             animator.SetBool("isAttacking", false);
             animator.SetBool("isRunning", true);
-            agent.SetDestination(player = GameManager.playerInstance.transform.position);
+            agent.SetDestination(playerPos.position);
         }
     }
     private void DealDamage()
@@ -122,7 +119,7 @@ public class ZombieScript : MonoBehaviour
             playerController.health -= damage;
             FindObjectOfType<SoundManager>().Play("zombie bite");
             lastShot = Time.time;
-            agent.SetDestination(player = GameManager.playerInstance.transform.position);
+            agent.SetDestination(playerPos.position);
         }
     }
 
@@ -154,7 +151,7 @@ public class ZombieScript : MonoBehaviour
         if (agent.isStopped == false)
         {
             agent.ResetPath();
-            agent.SetDestination(player = GameManager.playerInstance.transform.position);
+            agent.SetDestination(playerPos.position);
         }
     }
 }

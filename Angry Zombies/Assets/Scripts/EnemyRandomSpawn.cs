@@ -25,14 +25,10 @@ public class EnemyRandomSpawn : MonoBehaviour
             int number = Random.Range(1, zombieNumber);
             for (int i = 0; i < zombieNumber; i++)
             {
+                x = Random.Range(0, SpawnPoints.Length);
                 GameObject GO = Instantiate(zombiePrefab, SpawnPoints[x].transform.position, Quaternion.identity);
                 // int offset = Random.Range(1, 10);
                 // GO.transform.position = new Vector3(GO.transform.position.x + offset, GO.transform.position.y, GO.transform.position.z + offset);
-                x++;
-                if (x > 3)
-                {
-                    x = 0;
-                }
             }
             lastSpawn = Time.time;
             zombieNumber += 1;

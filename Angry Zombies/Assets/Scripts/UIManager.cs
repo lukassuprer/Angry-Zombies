@@ -51,7 +51,8 @@ public class UIManager : MonoBehaviour
         }
     }
     public void WeaponName(){
-        weaponName.text = weaponScript.weaponName;
+        weaponName.text = weaponScript.currentGun.weaponName;
+        Debug.Log(weaponScript.currentGun.weaponName);
     }
     public void Play(){
         GameManager.gameStart = true;

@@ -4,24 +4,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float mh;
-    public float mv;
+    public float moveHorizontal;
+    public float moveVertical;
     public float speed;
     public Rigidbody rb;
     public Camera cam;
     public Animator animator;
-    public GameObject weapon;
+    public GameObject weaponSwitch;
     public float health = 100f;
 
     private void Awake(){
         GameManager.playerInstance = this;
     }
-    private void Start() {
-        rb = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
-    }
     void Update()
     {
+        GameManager.playerInstance = this;
         Move();
         Rotation();
 
@@ -31,10 +28,10 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Move(){
-        mh = Input.GetAxis("Horizontal");
-        mv = Input.GetAxis("Vertical");
+        moveHorizontal = Input.GetAxis("Horizontal");
+        moveVertical = Input.GetAxis("Vertical");
 
-        Vector3 move = new Vector3(-mh, 0, -mv);
+        Vector3 move = new Vector3(-moveHorizontal, 0, -moveVertical);
         rb.MovePosition(transform.position + move * Time.deltaTime * speed);
     }
     private void Rotation(){
@@ -50,6 +47,6 @@ public class PlayerController : MonoBehaviour
     private void Dead(){
         animator.SetBool("isDead", true);
         transform.GetComponent<PlayerController>().enabled = false;
-        weapon.SetActive(false);
+        weaponSwitch.SetActive(false);
     }
 }

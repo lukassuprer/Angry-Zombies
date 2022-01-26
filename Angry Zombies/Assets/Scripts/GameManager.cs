@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject soundManager;
     public GameObject pauseButton;
     public GameObject hud;
+    public GameObject inventory;
     public Slider mainSlider;
 
     private void Update()
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
             soundManager.SetActive(true);
             pauseButton.SetActive(true);
             hud.SetActive(true);
+            //inventory.SetActive(true);
 
             mainSlider.value = PlayerPrefs.GetFloat("volume");
             gameStart = false;

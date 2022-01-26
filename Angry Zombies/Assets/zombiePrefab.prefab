@@ -2951,11 +2951,15 @@ MonoBehaviour:
   damageRate: 3
   zombie: {fileID: 8221631724276238628}
   agent: {fileID: 9140182642146166129}
+  playerPos: {fileID: 8860078710345039908, guid: ca5024dcbb2a546b39da88d97b901ccc,
+    type: 3}
   layerPlayer:
     serializedVersion: 2
     m_Bits: 256
   animator: {fileID: 9140182642146166127}
   renderer: {fileID: 9140182642146166124}
+  playerController: {fileID: 9043205897932811739, guid: ca5024dcbb2a546b39da88d97b901ccc,
+    type: 3}
 --- !u!195 &9140182642146166129
 NavMeshAgent:
   m_ObjectHideFlags: 0
