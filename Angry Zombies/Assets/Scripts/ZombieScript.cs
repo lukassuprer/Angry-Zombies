@@ -81,6 +81,7 @@ public class ZombieScript : MonoBehaviour, IPooledObject
     IEnumerator wait()
     {
         yield return new WaitForSeconds(5);
+        GameManager.score += 10;
         zombie.SetActive(false);
     }
 

@@ -15,12 +15,15 @@ public class UIManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject hud;
     public Text weaponName;
+    public TMP_InputField nameField;
+    public string playerName;   
     private void Start() {
         if(PlayerPrefs.HasKey("volume")){
             mainSlider.value = PlayerPrefs.GetFloat("volume");
+            mainSlider1.value = PlayerPrefs.GetFloat("volume");
         }
         else{
-            mainSlider.value = 0.1f;
+            //mainSlider.value = 0.1f;
         }
     }   
     public void SubmitSliderSetting()
@@ -43,6 +46,14 @@ public class UIManager : MonoBehaviour
             Health();
         }
         WeaponName();
+        GetName();
+    }
+    public void GetName(){
+        playerName = nameField.text;
+
+        if(playerName == ""){
+            playerName = "somestupidass";
+        }
     }
     public void Health(){
         health.text = playerController.health.ToString();
@@ -52,10 +63,12 @@ public class UIManager : MonoBehaviour
     }
     public void WeaponName(){
         weaponName.text = weaponScript.currentGun.weaponName;
-        Debug.Log(weaponScript.currentGun.weaponName);
     }
     public void Play(){
         GameManager.gameStart = true;
+    }
+    public void ExitToMainMenu(){
+        GameManager.gameExit = true;
     }
     public void Exit(){
         Application.Quit();

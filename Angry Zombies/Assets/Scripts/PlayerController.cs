@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     public GameObject weaponSwitch;
     public float health = 100f;
-
     private void Awake(){
         GameManager.playerInstance = this;
     }
