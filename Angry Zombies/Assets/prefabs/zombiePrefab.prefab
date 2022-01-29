@@ -2947,7 +2947,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   stopDistance: 2
-  damage: 10
+  damage: 0
   damageRate: 3
   zombie: {fileID: 8221631724276238628}
   agent: {fileID: 9140182642146166129}

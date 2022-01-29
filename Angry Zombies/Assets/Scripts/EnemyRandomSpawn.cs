@@ -9,7 +9,7 @@ public class EnemyRandomSpawn : MonoBehaviour
     public GameObject zombiePrefab;
     private float lastSpawn;
     public float spawnRate;
-    private int x = 0;
+    public int x = 0;
     ObjectPooler objectPooler;
 
     private void Start() {
@@ -32,6 +32,7 @@ public class EnemyRandomSpawn : MonoBehaviour
             {
                 x = Random.Range(0, SpawnPoints.Length);
                 objectPooler.SpawnFromPool("Zombie", SpawnPoints[x].transform.position, Quaternion.identity);
+                //Instantiate(zombiePrefab, SpawnPoints[x].transform.position, Quaternion.identity);
             }
             lastSpawn = Time.time;
             zombieNumber += 1;

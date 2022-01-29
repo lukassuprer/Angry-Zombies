@@ -56,7 +56,8 @@ public class ZombieScript : MonoBehaviour, IPooledObject
             agent.velocity = Vector3.zero;
             agent.isStopped = true;
             agent.ResetPath();
-            transform.GetComponent<ZombieScript>().enabled = false;
+            //transform.GetComponent<ZombieScript>().enabled = false;
+            this.enabled = false;
         }
         DrawPath();
 
@@ -71,7 +72,8 @@ public class ZombieScript : MonoBehaviour, IPooledObject
     }
     private void Die()
     {
-        transform.GetComponent<ZombieScript>().enabled = false;
+        //transform.GetComponent<ZombieScript>().enabled = false;
+        this.enabled = false;
         CancelInvoke();
         animator.SetBool("isDead", true);
         SetAllCollidersStatus(false);

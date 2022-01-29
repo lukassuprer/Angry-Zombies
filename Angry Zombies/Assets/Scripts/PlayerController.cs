@@ -45,7 +45,8 @@ public class PlayerController : MonoBehaviour
 
     private void Dead(){
         animator.SetBool("isDead", true);
-        transform.GetComponent<PlayerController>().enabled = false;
+        //transform.GetComponent<PlayerController>().enabled = false;
+        this.enabled = false;
         weaponSwitch.SetActive(false);
     }
 }
