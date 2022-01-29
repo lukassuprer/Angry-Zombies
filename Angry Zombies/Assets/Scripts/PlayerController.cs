@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private void Awake(){
         GameManager.playerInstance = this;
     }
-    void Update()
+    void FixedUpdate()
     {
         GameManager.playerInstance = this;
         Move();

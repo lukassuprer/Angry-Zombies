@@ -15,15 +15,17 @@ public class AnimationController : MonoBehaviour
     private bool leftPressed;
     private bool backPressed;
 
-    private void Start() {
-        animator = GetComponent<Animator>();
-    }
+    private Vector3 mousePos;
+    private Vector3 posDif;
+    public Camera cam;
     private void Update()
     {
-        forwardPressed = Input.GetKey(KeyCode.W);
-        rightPressed = Input.GetKey(KeyCode.D);
-        leftPressed = Input.GetKey(KeyCode.A);
-        backPressed = Input.GetKey(KeyCode.S);
+        // forwardPressed = Input.GetKey(KeyCode.W);
+        // rightPressed = Input.GetKey(KeyCode.D);
+        // leftPressed = Input.GetKey(KeyCode.A);
+        // backPressed = Input.GetKey(KeyCode.S);
+        
+        GetInput();
 
         animator.SetFloat("Velocity Z", velocityZ);
         animator.SetFloat("Velocity X", velocityX);
@@ -33,11 +35,22 @@ public class AnimationController : MonoBehaviour
     }
 
     private void Vertical(){
-        if(forwardPressed && velocityZ < 0.5){
+        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+ 
+        Vector3 forward = transform.TransformDirection(Vector3.forward);
+        Vector3 toOther = mousePos - transform.position;
+
+        if(forwardPressed && velocityZ < 0.5 && Vector3.Dot(forward, toOther) < 0){
             velocityZ += Time.deltaTime * acceleration;
         }
-        else if(backPressed && velocityZ > -0.5){
+        else if(forwardPressed && velocityZ > -0.5 && Vector3.Dot(forward, toOther) > 0){
             velocityZ -= Time.deltaTime * acceleration;
+        }
+        else if(backPressed && velocityZ > -0.5 && Vector3.Dot(forward, toOther) < 0){
+            velocityZ -= Time.deltaTime * acceleration;
+        }
+        else if(backPressed && velocityZ < 0.5 && Vector3.Dot(forward, toOther) > 0){
+            velocityZ += Time.deltaTime * acceleration;
         }
 
         if(!forwardPressed && !backPressed && velocityZ > 0.0){
@@ -64,6 +77,31 @@ public class AnimationController : MonoBehaviour
 
         if(!leftPressed && !rightPressed && velocityX != 0 && (velocityX > -0.05 && velocityX < 0.05)){
             velocityX = 0;
+        }
+    }
+    private void GetInput(){
+        float vertical = Input.GetAxis("Vertical");
+        if(vertical > 0.2f){
+            forwardPressed = true;
+        }
+        else if(vertical < -0.2f){
+            backPressed = true;
+        }
+        else if(vertical <= 0.15f && vertical >= -0.15f){
+            forwardPressed = false;
+            backPressed = false;
+        }
+
+        float horizontal = Input.GetAxis("Horizontal");
+        if(horizontal > 0.2f){
+            rightPressed = true;
+        }
+        else if(horizontal < -0.2f){
+            leftPressed = true;
+        }
+        else if(horizontal <= 0.15f && horizontal >= -0.15f){
+            rightPressed = false;
+            leftPressed = false;
         }
     }
 }

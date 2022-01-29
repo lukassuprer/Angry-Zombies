@@ -87,7 +87,7 @@ public class ZombieScript : MonoBehaviour, IPooledObject
         if(i == 5 || i == 10 || i == 15 || i == 20){
             Instantiate(droppableItem[0], this.transform.position, Quaternion.identity);
         }
-        else if(i == 1 || i == 20){
+        else if(i == 1 || i == 9 || i == 13 || i == 16){
             if(Pickable_Gun.gunsUnlocked == false && x == 1){
                 if(Pickable_Gun.shotgunUnlocked == false)
                 Instantiate(droppableItem[1], this.transform.position, Quaternion.identity);

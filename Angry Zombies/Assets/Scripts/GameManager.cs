@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
             gameStart = false;
             isPlaying = false;
             gameExit = false;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 

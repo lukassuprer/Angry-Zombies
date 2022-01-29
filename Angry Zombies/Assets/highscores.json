@@ -1,6 +1,10 @@
 {
     "highscores": [
         {
+            "entryName": "Lukas",
+            "entryScore": 270
+        },
+        {
             "entryName": "somestupidass",
             "entryScore": 120
         },
@@ -11,10 +15,6 @@
         {
             "entryName": "lukas",
             "entryScore": 40
-        },
-        {
-            "entryName": "somestupidass",
-            "entryScore": 30
         },
         {
             "entryName": "somestupidass",
