@@ -2960,6 +2960,10 @@ MonoBehaviour:
   renderer: {fileID: 9140182642146166124}
   playerController: {fileID: 9043205897932811739, guid: ca5024dcbb2a546b39da88d97b901ccc,
     type: 3}
+  droppableItem:
+  - {fileID: 4310847097699555663, guid: c45ff96a8da284050bc9e04f051e43a7, type: 3}
+  - {fileID: 206414609077417078, guid: b8f0e778db6b24bfb8c7595e8e419d0c, type: 3}
+  - {fileID: 5853514516435864346, guid: a86d3ce618cd64b8d8c251755f073560, type: 3}
 --- !u!195 &9140182642146166129
 NavMeshAgent:
   m_ObjectHideFlags: 0

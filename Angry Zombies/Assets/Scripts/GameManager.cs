@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
             gameStart = false;
             isPlaying = true;
             addedScore = false;
+            Time.timeScale = 1;
         }
         else{
         }

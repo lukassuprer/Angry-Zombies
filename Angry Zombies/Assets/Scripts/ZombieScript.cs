@@ -18,6 +18,7 @@ public class ZombieScript : MonoBehaviour, IPooledObject
     public Animator animator;
     public LineRenderer renderer;
     public PlayerController playerController;
+    public GameObject[] droppableItem;
     public void OnObjectSpawn()
     {
         playerPos = GameObject.FindObjectOfType<PlayerController>().transform;
@@ -79,12 +80,31 @@ public class ZombieScript : MonoBehaviour, IPooledObject
         SetAllCollidersStatus(false);
         StartCoroutine("wait");
     }
+    private void DropItem()
+    {
+        int i = Random.Range(0, 21);
+        int x = Random.Range(1, 3);
+        if(i == 5 || i == 10 || i == 15 || i == 20){
+            Instantiate(droppableItem[0], this.transform.position, Quaternion.identity);
+        }
+        else if(i == 1 || i == 20){
+            if(Pickable_Gun.gunsUnlocked == false && x == 1){
+                if(Pickable_Gun.shotgunUnlocked == false)
+                Instantiate(droppableItem[1], this.transform.position, Quaternion.identity);
+            }
+            else if(Pickable_Gun.gunsUnlocked == false && x == 2){
+                if(Pickable_Gun.umpUnlocked == false)
+                Instantiate(droppableItem[2], this.transform.position, Quaternion.identity);
+            }
+        }
+    }
 
     IEnumerator wait()
     {
         yield return new WaitForSeconds(5);
         GameManager.score += 10;
         zombie.SetActive(false);
+        DropItem();
     }
 
     private void StopAtPlayer()

@@ -44,7 +44,7 @@ public class WeaponSwitching : MonoBehaviour
             guns[1].ammoContainer.SetActive(false);
             guns[2].ammoContainer.SetActive(false);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && transform.childCount >= 2)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && transform.childCount >= 2 && Pickable_Gun.shotgunUnlocked == true)
         {
             selectedWeapon = 1;
             weaponScript.currentGun = guns[1];
@@ -52,7 +52,7 @@ public class WeaponSwitching : MonoBehaviour
             guns[1].ammoContainer.SetActive(true);
             guns[2].ammoContainer.SetActive(false);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3) && transform.childCount >= 3)
+        if (Input.GetKeyDown(KeyCode.Alpha3) && transform.childCount >= 3 && Pickable_Gun.umpUnlocked == true)
         {
             selectedWeapon = 2;
             weaponScript.currentGun = guns[2];

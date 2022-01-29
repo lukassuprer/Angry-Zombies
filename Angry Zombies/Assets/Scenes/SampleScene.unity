@@ -22139,7 +22139,7 @@ Transform:
   - {fileID: 862017829}
   - {fileID: 1269915296}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &535137659
 PrefabInstance:
@@ -29901,12 +29901,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 1.0930656e-10, y: 0.92387956, z: -0.38268346, w: -0.000000024465356}
+  m_LocalRotation: {x: 0.000000016850377, y: 0.92387956, z: -0.38268343, w: 0.000000015951164}
   m_LocalPosition: {x: 58.81, y: 12.71, z: 10}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2000004}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: -103.94701, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
@@ -30548,7 +30548,7 @@ Transform:
   - {fileID: 2131911946}
   - {fileID: 252128445}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1051610080
 PrefabInstance:
@@ -34622,13 +34622,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1283500181}
-  m_LocalRotation: {x: 1.0930656e-10, y: 0.92387956, z: -0.38268346, w: -0.000000024465356}
+  m_LocalRotation: {x: 0.000000016850377, y: 0.92387956, z: -0.38268343, w: 0.000000015951164}
   m_LocalPosition: {x: 58.81, y: 12.71, z: 10}
   m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000002}
   m_Children:
   - {fileID: 602886629}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1289870069 stripped
 GameObject:
@@ -39443,7 +39443,7 @@ MonoBehaviour:
   cam: {fileID: 963194227}
   animator: {fileID: 1634399296}
   weaponSwitch: {fileID: 0}
-  health: 100
+  health: 50
 --- !u!95 &1634399296
 Animator:
   serializedVersion: 3
@@ -48672,13 +48672,27 @@ GameObject:
   - component: {fileID: 1634399297}
   - component: {fileID: 1634399298}
   - component: {fileID: 1634399299}
+  - component: {fileID: 919132149200978811}
   m_Layer: 8
   m_Name: swat
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!65 &919132149200978811
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149200978810}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.47906557, y: 0.49175173, z: 0.24671979}
+  m_Center: {x: -0.02055327, y: 0.25412413, z: 0.0069333734}
 --- !u!1 &988996936454539912
 GameObject:
   m_ObjectHideFlags: 0
@@ -51753,7 +51767,7 @@ PrefabInstance:
     - target: {fileID: 8742272832741905310, guid: 1a89c968b2c814c1ea5059e90acb255c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8742272832741905310, guid: 1a89c968b2c814c1ea5059e90acb255c,
         type: 3}
