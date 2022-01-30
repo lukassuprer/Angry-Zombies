@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    //Just manages ingame sound. Assigns settings from sound list and plays sounds
     public Sound[] sounds;
     public void Awake()
     {

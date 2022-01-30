@@ -11,10 +11,12 @@ public class Pickable_Gun : MonoBehaviour
     private string umpName = "droppable_ump_prefab(Clone)";
     void Update()
     {
+        //Checks if guns are unlocked
         if(shotgunUnlocked == true && umpUnlocked == true){
             gunsUnlocked = true;
         }
     }
+    //On collision with player sets that weapon activate and destroys this prefab
     private void OnTriggerEnter(Collider player){
         if(gameObject.name == shotgunName){
             shotgunUnlocked = true;

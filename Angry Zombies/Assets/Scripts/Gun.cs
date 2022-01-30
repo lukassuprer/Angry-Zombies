@@ -5,6 +5,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class Gun
 {
+    //Just a list that holds info about every gun
     public string weaponName;
     public float currentAmmo;
     public float maxAmmo;

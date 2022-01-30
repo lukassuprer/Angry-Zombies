@@ -19,12 +19,7 @@ public class AnimationController : MonoBehaviour
     private Vector3 posDif;
     public Camera cam;
     private void Update()
-    {
-        // forwardPressed = Input.GetKey(KeyCode.W);
-        // rightPressed = Input.GetKey(KeyCode.D);
-        // leftPressed = Input.GetKey(KeyCode.A);
-        // backPressed = Input.GetKey(KeyCode.S);
-        
+    {   
         GetInput();
 
         animator.SetFloat("Velocity Z", velocityZ);
@@ -34,6 +29,7 @@ public class AnimationController : MonoBehaviour
         Horizontal();
     }
 
+    //Move forward and backward
     private void Vertical(){
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
  
@@ -60,6 +56,7 @@ public class AnimationController : MonoBehaviour
             velocityZ = 0;
         }
     }
+    //Move right and left
     private void Horizontal(){
         if(leftPressed && velocityX > -0.5){
             velocityX -= Time.deltaTime * acceleration;
@@ -79,6 +76,7 @@ public class AnimationController : MonoBehaviour
             velocityX = 0;
         }
     }
+    //Get horizontal and vertical input and assign it to booleans
     private void GetInput(){
         float vertical = Input.GetAxis("Vertical");
         if(vertical > 0.2f){

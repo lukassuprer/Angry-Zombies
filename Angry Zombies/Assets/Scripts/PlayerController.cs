@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
             Dead();
         }
     }
-
+    //Handles movement
     private void Move(){
         moveHorizontal = Input.GetAxis("Horizontal");
         moveVertical = Input.GetAxis("Vertical");
@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
         Vector3 move = new Vector3(-moveHorizontal, 0, -moveVertical);
         rb.MovePosition(transform.position + move * Time.deltaTime * speed);
     }
+    //Handles rotation towards mouse
     private void Rotation(){
         Vector3 playerPos = cam.WorldToScreenPoint(rb.transform.position);
         Vector3 mousePos = Input.mousePosition;
@@ -42,10 +43,9 @@ public class PlayerController : MonoBehaviour
 
         rb.rotation = Quaternion.LookRotation(finalVector);
     }
-
+    //Called when dead
     private void Dead(){
         animator.SetBool("isDead", true);
-        //transform.GetComponent<PlayerController>().enabled = false;
         this.enabled = false;
         weaponSwitch.SetActive(false);
     }

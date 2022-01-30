@@ -19,6 +19,8 @@ public class ZombieScript : MonoBehaviour, IPooledObject
     public LineRenderer renderer;
     public PlayerController playerController;
     public GameObject[] droppableItem;
+
+    //Like start function, just called whenever this spawns
     public void OnObjectSpawn()
     {
         playerPos = GameObject.FindObjectOfType<PlayerController>().transform;
@@ -35,7 +37,7 @@ public class ZombieScript : MonoBehaviour, IPooledObject
     {
         if (playerController != null && playerController.health > 0 && agent.isStopped == false && agent.enabled == true)
         {
-            //agent.SetDestination(player = GameManager.playerInstance.transform.position);
+            
         }
         else
         {
@@ -57,12 +59,12 @@ public class ZombieScript : MonoBehaviour, IPooledObject
             agent.velocity = Vector3.zero;
             agent.isStopped = true;
             agent.ResetPath();
-            //transform.GetComponent<ZombieScript>().enabled = false;
             this.enabled = false;
         }
-        DrawPath();
-
+        //Just for debbuging 
+        //DrawPath();
     }
+    //Called when getting hit
     public void TakeDamage(float amount)
     {
         health -= amount;
@@ -71,15 +73,16 @@ public class ZombieScript : MonoBehaviour, IPooledObject
             Die();
         }
     }
+    //Kills this and starts animation + adds score
     private void Die()
     {
-        //transform.GetComponent<ZombieScript>().enabled = false;
         this.enabled = false;
         CancelInvoke();
         animator.SetBool("isDead", true);
         SetAllCollidersStatus(false);
-        StartCoroutine("wait");
+        StartCoroutine(WaitForDespawn());
     }
+    //Called on dead, has chance to drop item
     private void DropItem()
     {
         int i = Random.Range(0, 21);
@@ -98,15 +101,15 @@ public class ZombieScript : MonoBehaviour, IPooledObject
             }
         }
     }
-
-    IEnumerator wait()
+    //Wait certain time before getting despawned
+    IEnumerator WaitForDespawn()
     {
         yield return new WaitForSeconds(5);
         GameManager.score += 10;
         zombie.SetActive(false);
         DropItem();
     }
-
+    //Stopping at certain distance from player and hitting 
     private void StopAtPlayer()
     {
         bool distance = agent.remainingDistance > agent.stoppingDistance;
@@ -134,6 +137,7 @@ public class ZombieScript : MonoBehaviour, IPooledObject
             agent.SetDestination(playerPos.position);
         }
     }
+    //Dealing damage called in animation
     private void DealDamage()
     {
         if (Time.time > damageRate + lastShot)
@@ -145,7 +149,7 @@ public class ZombieScript : MonoBehaviour, IPooledObject
             agent.SetDestination(playerPos.position);
         }
     }
-
+    //Just for debbuging
     void DrawPath()
     {
         renderer.positionCount = agent.path.corners.Length;
@@ -162,6 +166,7 @@ public class ZombieScript : MonoBehaviour, IPooledObject
             renderer.SetPosition(1, pointPosition);
         }
     }
+    //When dead deactivate colliders so they dont block bullets
     public void SetAllCollidersStatus(bool active)
     {
         foreach (Collider c in GetComponents<Collider>())
@@ -169,6 +174,7 @@ public class ZombieScript : MonoBehaviour, IPooledObject
             c.enabled = active;
         }
     }
+    //Called every 2 seconds so there is no lags but he still searches for player kinda often
     private void FindPlayer()
     {
         if (agent.isStopped == false)

@@ -4,5 +4,6 @@ using UnityEngine;
 
 public interface IPooledObject
 {
+    //Creates method that acts like start method for spawned enemies 
     void OnObjectSpawn();
 }

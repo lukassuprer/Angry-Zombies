@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class disableStart : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //Disables navmesh colliders on start
     void Start()
     {
         Destroy(gameObject);

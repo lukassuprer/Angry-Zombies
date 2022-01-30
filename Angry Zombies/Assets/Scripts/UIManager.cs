@@ -6,6 +6,7 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    //Takes care of all UI. Buttons, text and so on......
     public Slider mainSlider;
     public Slider mainSlider1;
     public Text health;
@@ -16,6 +17,7 @@ public class UIManager : MonoBehaviour
     public GameObject hud;
     public Text weaponName;
     public TMP_InputField nameField;
+    public TextMeshProUGUI score;
     public string playerName;   
     private void Start() {
         if(PlayerPrefs.HasKey("volume")){
@@ -47,6 +49,7 @@ public class UIManager : MonoBehaviour
         }
         WeaponName();
         GetName();
+        score.text = GameManager.score.ToString();
     }
     public void GetName(){
         playerName = nameField.text;

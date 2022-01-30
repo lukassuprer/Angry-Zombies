@@ -12,6 +12,7 @@ public class Pickable_Item : MonoBehaviour
     }
     private void OnTriggerEnter(Collider player)
     {
+        //Checks if player can be healed and then heals him 
         if (playerController.health > 0 && playerController.health <= 80)
         {
             playerController.health += 20;

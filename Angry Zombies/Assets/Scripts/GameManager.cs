@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        //Game start activated all needed components
         if (gameStart == true)
         {
             player.SetActive(true); 
@@ -31,28 +32,23 @@ public class GameManager : MonoBehaviour
             soundManager.SetActive(true);
             pauseButton.SetActive(true);
             hud.SetActive(true);
-            //inventory.SetActive(true);
 
             mainSlider.value = PlayerPrefs.GetFloat("volume");
             gameStart = false;
             isPlaying = true;
             addedScore = false;
             Time.timeScale = 1;
+            score = 0;
         }
         else{
         }
-        // if(gameStart == true){
-        //     if(zombieScript.health <= 0){
-        //         score += 10;
-        //     }
-        // }
+        //On game exit deactivate these components
         if(gameExit == true){
             player.SetActive(false); 
             enemySpawner.SetActive(false);
             soundManager.SetActive(false);
             pauseButton.SetActive(false);
             hud.SetActive(false);
-            //inventory.SetActive(true);
 
             mainSlider1.value = PlayerPrefs.GetFloat("volume");
             gameStart = false;

@@ -9,7 +9,7 @@ public class WeaponSwitching : MonoBehaviour
     public List<Gun> guns = new List<Gun>();
     void Start()
     {
-        //SelectWeapon();
+        //Selects M4A4 as starting weapon
         selectedWeapon = 0;
         weaponScript.currentGun = guns[0];
         guns[0].ammoContainer.SetActive(true);
@@ -18,24 +18,9 @@ public class WeaponSwitching : MonoBehaviour
     }
     private void Update()
     {
-
         int previousSelectedWeapon = selectedWeapon;
-
-        if (Input.GetAxis("Mouse ScrollWheel") > 0)
-        {
-            if (selectedWeapon >= transform.childCount - 1)
-                selectedWeapon = 0;
-            else
-                selectedWeapon++;
-        }
-        if (Input.GetAxis("Mouse ScrollWheel") < 0)
-        {
-            if (selectedWeapon <= 0)
-                selectedWeapon = transform.childCount - 1;
-            else
-                selectedWeapon--;
-        }
-
+        
+        //Selects M4A4
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             selectedWeapon = 0;
@@ -44,6 +29,7 @@ public class WeaponSwitching : MonoBehaviour
             guns[1].ammoContainer.SetActive(false);
             guns[2].ammoContainer.SetActive(false);
         }
+        //Selects shotgun
         if (Input.GetKeyDown(KeyCode.Alpha2) && transform.childCount >= 2 && Pickable_Gun.shotgunUnlocked == true)
         {
             selectedWeapon = 1;
@@ -52,6 +38,7 @@ public class WeaponSwitching : MonoBehaviour
             guns[1].ammoContainer.SetActive(true);
             guns[2].ammoContainer.SetActive(false);
         }
+        //Selects UMP
         if (Input.GetKeyDown(KeyCode.Alpha3) && transform.childCount >= 3 && Pickable_Gun.umpUnlocked == true)
         {
             selectedWeapon = 2;
