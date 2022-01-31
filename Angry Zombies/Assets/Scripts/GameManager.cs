@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public static bool gameStart;
     public static bool gameExit;
     public static bool isPlaying;
+    public static bool unpaused;
     public GameObject player;
     public GameObject enemySpawner;
     public GameObject soundManager;
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     public Slider mainSlider;
     public Slider mainSlider1;
     public ZombieScript zombieScript;
+    public SoundManager soundManagerScript;
     public static bool addedScore;
     public static int score;
 
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
             addedScore = false;
             Time.timeScale = 1;
             score = 0;
+            unpaused = true;
         }
         else{
         }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Pickable_Item : MonoBehaviour
 {
     private PlayerController playerController;
-
     private void Start()
     {
         playerController = FindObjectOfType<PlayerController>();

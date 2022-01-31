@@ -6,6 +6,21 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    [System.Serializable]
+    public class Sound
+    {
+        //List of sound settings
+        public string name;
+        public AudioClip clip;
+        [Range(0f, 1f)]
+        [HideInInspector]
+        public float volume;
+        [Range(0.1f, 3f)]
+        public float pitch;
+        [HideInInspector]
+        public AudioSource source;
+        public int priority;
+    }
     //Just manages ingame sound. Assigns settings from sound list and plays sounds
     public Sound[] sounds;
     public void Awake()
@@ -23,36 +38,46 @@ public class SoundManager : MonoBehaviour
     {
         InvokeRepeating("RandomSound", 5f, 5f);
     }
-    void Update()
-    {
+    private void Update(){
+        if(GameManager.unpaused == true){
+            SetVolume();
+            GameManager.unpaused = false;
+        }
+    }
+    public void SetVolume(){
         foreach (Sound s in sounds)
         {
-            if(PlayerPrefs.HasKey("volume")){
+            if (PlayerPrefs.HasKey("volume"))
+            {
                 s.source.volume = PlayerPrefs.GetFloat("volume");
             }
-            else{
+            else
+            {
                 s.source.volume = 0.1f;
             }
         }
     }
-    private void RandomSound(){
+    private void RandomSound()
+    {
         int soundNumber = UnityEngine.Random.Range(2, 6);
         switch (soundNumber)
         {
             case 2:
-                FindObjectOfType<SoundManager>().Play("zombie burp");
+                Play("zombie burp");
                 break;
             case 3:
-                FindObjectOfType<SoundManager>().Play("zombie moan");
+                Play("zombie moan");
                 break;
             case 4:
-                FindObjectOfType<SoundManager>().Play("zombie moan1");
+                Play("zombie moan1");
                 break;
             case 5:
-                FindObjectOfType<SoundManager>().Play("zombie moan2");
+                Play("zombie moan2");
+                break;
+            default:
+                Play("zombie moan");
                 break;
         }
-        Play("zombie moan");
     }
     public void Play(string name)
     {

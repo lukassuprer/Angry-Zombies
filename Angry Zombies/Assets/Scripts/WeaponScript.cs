@@ -8,7 +8,7 @@ public class WeaponScript : MonoBehaviour
     private float lastShot = 0f;
     public bool isReloading;
     public Camera cam;
-    public Gun currentGun;
+    public WeaponSwitching.Gun currentGun;
     
     private void Start(){
         //Just setting guns ammo to one that is set in list

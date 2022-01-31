@@ -1,9 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class WeaponSwitching : MonoBehaviour
 {
+    [System.Serializable]
+    public class Gun
+    {
+        //Just a list that holds info about every gun
+        public string weaponName;
+        public float currentAmmo;
+        public float maxAmmo;
+        public float range;
+        public float damage;
+        public float fireRate;
+        public Transform weaponEnd;
+        public ParticleSystem muzzleFlash;
+        public GameObject weapon;
+        public GameObject impactEffect;
+        public LineRenderer renderer;
+        public Text ammoText;
+        public GameObject ammoContainer;
+        public float shots;
+        public float offset;
+        public string soundName;
+    }
     public static int selectedWeapon = 0;
     public WeaponScript weaponScript;
     public List<Gun> guns = new List<Gun>();
@@ -19,7 +40,7 @@ public class WeaponSwitching : MonoBehaviour
     private void Update()
     {
         int previousSelectedWeapon = selectedWeapon;
-        
+
         //Selects M4A4
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
